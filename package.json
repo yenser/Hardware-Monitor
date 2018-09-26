@@ -1,7 +1,9 @@
 {
   "name": "hardware-monitor",
   "version": "0.1.0",
-  "main": "src/electron-starter.js",
+  "author": "Jens Streck",
+  "Description": "Hardware monitor written in Node JS",
+  "main": "src/electron.js",
   "homepage": "./",
   "private": true,
   "dependencies": {
@@ -23,10 +25,19 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "electron": "electron .",
-    "electron-dev": "set ELECTRON_START_URL=http://localhost:3000 && electron ."
+    "electron-dev": "set ELECTRON_START_URL=http://localhost:3000 && electron .",
+    "electron-pack": "build --em.main=build/electron.js",
+    "preelectron-pack": "npm run build"
   },
   "devDependencies": {
     "electron": "^3.0.0",
     "electron-builder": "^20.28.4"
+  },
+  "build": {
+    "appId": "Hardware Monitor",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ]
   }
 }
