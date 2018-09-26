@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "author": "Jens Streck",
   "Description": "Hardware monitor written in Node JS",
-  "main": "src/electron.js",
+  "main": "public/electron.js",
   "homepage": "./",
   "private": true,
   "dependencies": {
