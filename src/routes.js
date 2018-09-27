@@ -1,8 +1,22 @@
 import React from 'react';
 import { Route } from 'react-router';
-import HomePage from './components/homePage';
-import Ram from './components/ram/ram';
-import Cpu from './components/cpu/cpu';
+import Loadable from 'react-loadable';
+import Loading from './loading/loading';
+
+const HomePage = Loadable({
+    loader: () => import('./components/homePage'),
+    loading: Loading
+});
+
+const Ram = Loadable({
+    loader: () => import('./components/ram/ram'),
+    loading: Loading
+});
+
+const Cpu = Loadable({
+    loader: () => import('./components/cpu/cpu'),
+    loading: Loading
+});
 
 export default (
     <div>
