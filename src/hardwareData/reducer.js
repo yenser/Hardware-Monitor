@@ -19,7 +19,7 @@ const updateData = (state, action) => {
     stateClone.user = action.data.user;
     stateClone.system = action.data.system;
     stateClone.network = action.data.network;
-    stateClone.cpu = action.data.cpu;
+    stateClone.cpus = action.data.cpus;
 
     stateClone.ram.memHistory.shift();
     stateClone.ram.memHistory.push(getSizeInGigaByte(action.data.ram.usedmem));
