@@ -3,7 +3,7 @@ import './loading.css';
 
 const Loading = (props) => {
     return (
-        <div className="loader" />
+        <div className="loader">Loading...</div>
     );
 }
 
