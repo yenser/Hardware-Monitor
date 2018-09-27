@@ -15,10 +15,17 @@ function getSizeInGigaByte(a) {
 
 const updateData = (state, action) => {
     var stateClone = deepClone(state);
+
+    stateClone.user = action.data.user;
+    stateClone.system = action.data.system;
+    stateClone.network = action.data.network;
+    stateClone.cpu = action.data.cpu;
+
     stateClone.ram.memHistory.shift();
     stateClone.ram.memHistory.push(getSizeInGigaByte(action.data.ram.usedmem));
     stateClone.ram.usedmem = action.data.ram.usedmem;
     stateClone.ram.totalmem = action.data.ram.totalmem;
+
     console.log(stateClone);
 
     return {...stateClone};

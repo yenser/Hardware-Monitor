@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { HashRouter } from 'react-router-dom';
 import thunk from 'redux-thunk';
-import hardwareData from './ram/reducer';
+import hardwareData from './hardwareData/reducer';
 
 const composeEnhancers =
   typeof window === 'object' &&

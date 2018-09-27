@@ -1,8 +1,6 @@
 import React from 'react';
-import * as action from '../../ram/actions';
 import { connect } from 'react-redux';
 import LineGraph from './LineGraph';
-const { ipcRenderer } = window.require('electron');
 
 
 function formatBytes(a,b) {
@@ -20,15 +18,6 @@ function getSizeInGigaByte(a) {
 }
 
 class Ram extends React.Component {
-    constructor(props) {
-        super(props);
-        
-        ipcRenderer.on('hardwareData', (event, arg) => {
-            props.updateHardwareData(arg);
-        });
-
-    }
-
     render() {
 
         const percentage = Math.floor(100 * (this.props.ram.usedmem / this.props.ram.totalmem));
@@ -54,7 +43,7 @@ class Ram extends React.Component {
                         </div>
                     </div>
                 </div>
-                
+
                 <div className="row">
                     <div className="col-12">
                         <LineGraph data={this.props.ram.memHistory} maxMem={Math.ceil(getSizeInGigaByte(this.props.ram.totalmem))} />
@@ -71,10 +60,6 @@ const mapStateToProps = state => {
     }
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        updateHardwareData: (data) => dispatch(action.updateHardwareData(data))
-    }
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Ram);
+
+export default connect(mapStateToProps)(Ram);

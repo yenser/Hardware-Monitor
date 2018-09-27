@@ -22,15 +22,23 @@ function createWindow () {
   setInterval(() => {
     const totalmem = os.totalmem();
     const usedmem = totalmem - os.freemem();
-    const cpus = os.cpus();
+
     const data = {
-      cpus: {
-        ...cpus
+      system: {
+        type: os.type(),
+        platform: os.platform(),
+        arch: os.arch(),
+        uptime: os.uptime(),
+        release: os.release(),
+        name: os.hostname()
       },
+      user: os.userInfo(),
+      cpus: os.cpus(),
       ram: {
         totalmem,
         usedmem
-      }
+      },
+      network: os.networkInterfaces()
     };
     
     mainWindow.webContents.send('hardwareData', data);
