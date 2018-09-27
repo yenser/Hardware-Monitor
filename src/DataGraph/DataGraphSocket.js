@@ -1,9 +1,10 @@
 import React from 'react';
-import io from 'socket.io-client';
 import * as action from './actions';
 import { connect } from 'react-redux';
 import LineGraph from './LineGraph';
+import io from 'socket.io-client';
 let socket;
+
 
 function formatBytes(a,b) {
     if(0===a) {
@@ -19,14 +20,15 @@ function getSizeInGigaByte(a) {
     return parseFloat((a/Math.pow(c,f)).toFixed(2))
 }
 
-class DataGraph extends React.Component {
+class DataGraphSocket extends React.Component {
     constructor(props) {
         super(props);
+        
         socket = io.connect('http://localhost:8080');
-
         socket.on('hardwareData', res => {
             props.updateHardwareData(res);
         });
+
     }
 
     render() {
@@ -68,4 +70,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DataGraph);
+export default connect(mapStateToProps, mapDispatchToProps)(DataGraphSocket);

@@ -1,7 +1,8 @@
 const path = require('path');
+const os = require('os');
 
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, ipcMain} = require('electron');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -17,6 +18,16 @@ function createWindow () {
   mainWindow.loadURL(startUrl);
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
+
+  setInterval(() => {
+    const totalmem = os.totalmem();
+    const usedmem = totalmem - os.freemem();
+    const data = {
+        totalmem,
+        usedmem
+    };
+    mainWindow.webContents.send('hardwareData', data);
+  }, 1000);
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {

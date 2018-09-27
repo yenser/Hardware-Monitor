@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import DataGraph from './DataGraph/DataGraph';
+import DataGraph from './DataGraph/DataGraphLocal';
 
 class App extends Component {
   render() {
