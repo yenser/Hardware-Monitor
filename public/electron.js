@@ -22,10 +22,17 @@ function createWindow () {
   setInterval(() => {
     const totalmem = os.totalmem();
     const usedmem = totalmem - os.freemem();
+    const cpus = os.cpus();
     const data = {
+      cpus: {
+        ...cpus
+      },
+      ram: {
         totalmem,
         usedmem
+      }
     };
+    
     mainWindow.webContents.send('hardwareData', data);
   }, 1000);
 

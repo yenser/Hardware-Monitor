@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
+import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import { HashRouter } from 'react-router-dom';
 import thunk from 'redux-thunk';
-import hardwareData from './DataGraph/reducer';
+import hardwareData from './ram/reducer';
 
 const composeEnhancers =
   typeof window === 'object' &&
@@ -21,5 +22,13 @@ const rootReducer = combineReducers({
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 
-ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
+const app = (
+  <Provider store={store}>
+    <HashRouter>
+      <App />
+    </HashRouter>
+  </Provider>
+);
+
+ReactDOM.render(app, document.getElementById('root'));
 registerServiceWorker();

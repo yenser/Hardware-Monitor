@@ -1,7 +1,10 @@
 import * as actionTypes from './actionTypes';
+import { deepClone } from '../utils';
 
 const initialState = {
-    memHistory: Array(60).fill(NaN)
+    ram: {
+        memHistory: Array(60).fill(NaN)
+    }
 };
 
 function getSizeInGigaByte(a) {
@@ -11,11 +14,12 @@ function getSizeInGigaByte(a) {
 }
 
 const updateData = (state, action) => {
-    var stateClone = state;
-    stateClone.memHistory.shift();
-    stateClone.memHistory.push(getSizeInGigaByte(action.data.usedmem));
-    stateClone.usedmem = action.data.usedmem;
-    stateClone.totalmem = action.data.totalmem;
+    var stateClone = deepClone(state);
+    stateClone.ram.memHistory.shift();
+    stateClone.ram.memHistory.push(getSizeInGigaByte(action.data.ram.usedmem));
+    stateClone.ram.usedmem = action.data.ram.usedmem;
+    stateClone.ram.totalmem = action.data.ram.totalmem;
+    console.log(stateClone);
 
     return {...stateClone};
 }

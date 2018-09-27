@@ -53,6 +53,7 @@ class LineGraph extends React.Component {
                     <Line
                         data={data}
                         options={options}
+                        height="100%"
                         redraw
                      />
                 </div>

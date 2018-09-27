@@ -1,20 +1,33 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import DataGraph from './DataGraph/DataGraphLocal';
+import { Switch,withRouter } from 'react-router-dom';
+import routes from './routes';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Hardware Monitor</h1>
-        </header>
-        <DataGraph />
-      </div>
+        <div>
+          <div className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="navbar-brand">Hardware Monitor</div>
+            <ul className="navbar-nav">
+              <li className="navbar-item">
+                <a className="nav-link" href="#/">HOME</a>
+              </li>
+              <li className="navbar-item">
+                <a className="nav-link" href="#/ram">RAM</a>
+              </li>
+              <li className="navbar-item">
+                <a className="nav-link" href="#/cpu">CPU</a>
+              </li>
+            </ul>
+          </div>
+          <div className="container-fluid">
+              <Switch>
+                {routes}
+              </Switch>
+          </div>
+        </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
