@@ -18,10 +18,16 @@ const Cpu = Loadable({
     loading: Loading
 });
 
+const Credit = Loadable({
+    loader: () => import('./components/credit/credit'),
+    loading: Loading
+});
+
 export default (
     <div>
         <Route path="/ram" component={Ram} exact />
         <Route path="/cpu" component={Cpu} exact />
+        <Route path="/credit" component={Credit} exact />
         <Route path="/" component={HomePage} exact />
     </div>
 );

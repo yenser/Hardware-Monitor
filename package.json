@@ -9,6 +9,7 @@
   "dependencies": {
     "chart.js": "^2.7.2",
     "dotenv": "^6.0.0",
+    "moment": "^2.22.2",
     "react": "^16.5.2",
     "react-chartjs-2": "^2.7.4",
     "react-dom": "^16.5.2",
@@ -42,6 +43,10 @@
     "files": [
       "build/**/*",
       "node_modules/**/*"
-    ]
+    ],
+    "win": {
+      "icon": "build/icon.png",
+      "target": "portable"
+    }
   }
 }
