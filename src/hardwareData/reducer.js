@@ -26,7 +26,7 @@ const updateData = (state, action) => {
     stateClone.ram.usedmem = action.data.ram.usedmem;
     stateClone.ram.totalmem = action.data.ram.totalmem;
 
-    console.log(stateClone);
+    // console.log(stateClone);
 
     return {...stateClone};
 }

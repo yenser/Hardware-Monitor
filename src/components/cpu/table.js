@@ -17,8 +17,8 @@ class Table extends React.Component {
                     <th>{cpu.times.user}</th>
                     <th>{cpu.times.nice}</th>
                     <th>{cpu.times.sys}</th>
-                    <th>{cpu.times.idle}</th>
                     <th>{cpu.times.irq}</th>
+                    <th>{cpu.times.idle}</th>
                 </tr>
             );
         });
@@ -34,8 +34,8 @@ class Table extends React.Component {
                         <th scope="col">User</th>
                         <th scope="col">Nice</th>
                         <th scope="col">Sys</th>
-                        <th scope="col">Idle</th>
                         <th scope="col">Irq</th>
+                        <th scope="col">Idle</th>
                     </tr>
                 </thead>
                 <tbody>
