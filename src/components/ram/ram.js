@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import LineGraph from './LineGraph';
 
 
@@ -17,12 +16,11 @@ function getSizeInGigaByte(a) {
     return parseFloat((a/Math.pow(c,f)).toFixed(2))
 }
 
-class Ram extends React.Component {
-    render() {
+const Ram = ({ram}) => {
+            
+        const percentage = Math.floor(100 * (ram.usedmem / ram.totalmem));
 
-        const percentage = Math.floor(100 * (this.props.ram.usedmem / this.props.ram.totalmem));
-
-        if (!this.props.ram.totalmem) {
+        if (!ram.totalmem) {
             return null;
         }
         return (
@@ -36,22 +34,21 @@ class Ram extends React.Component {
                                 className="progress-bar bg-success"
                                 role="progressbar"
                                 style={{width: `${percentage}%`}}
-                                aria-valuenow={this.props.ram.usedmem}
+                                aria-valuenow={ram.usedmem}
                                 aria-valuemin="0"
-                                aria-valuemax={this.props.ram.totalmem}
-                            >{formatBytes(this.props.ram.usedmem)}/{formatBytes(this.props.ram.totalmem)}</div>
+                                aria-valuemax={ram.totalmem}
+                            >{formatBytes(ram.usedmem)}/{formatBytes(ram.totalmem)}</div>
                         </div>
                     </div>
                 </div>
 
                 <div className="row">
                     <div className="col-12">
-                        <LineGraph data={this.props.ram.memHistory} maxMem={Math.ceil(getSizeInGigaByte(this.props.ram.totalmem))} />
+                        <LineGraph data={ram.memHistory} maxMem={Math.ceil(getSizeInGigaByte(ram.totalmem))} />
                     </div>
                 </div>
             </div>
         );
-    }
 }
 
 const mapStateToProps = state => {
@@ -62,4 +59,4 @@ const mapStateToProps = state => {
 
 
 
-export default connect(mapStateToProps)(Ram);
+export default Ram;

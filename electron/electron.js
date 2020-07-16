@@ -4,16 +4,25 @@ const os = require('os');
 // Modules to control application life and create native browser window
 const {app, BrowserWindow, ipcMain} = require('electron');
 
+const isDev = require('electron-is-dev');
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
 function createWindow () {
+
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 1440, height: 900});
+  mainWindow = new BrowserWindow({
+    width: 1440,
+    height: 900,
+    webPreferences: {
+      nodeIntegration: true // is default value after Electron v5
+    }
+  });
 
   // and load the index.html of the app.
-  const startUrl = process.env.ELECTRON_START_URL || `file://${path.join(__dirname, '../build/index.html')}`;
+  const startUrl = isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`;
   
   mainWindow.loadURL(startUrl);
   // Open the DevTools.
@@ -44,6 +53,8 @@ function createWindow () {
     mainWindow.webContents.send('hardwareData', data);
   }, 1000);
 
+  mainWindow.once('ready-to-show', () => mainWindow.show());
+
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
     // Dereference the window object, usually you would store windows
@@ -56,7 +67,7 @@ function createWindow () {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow);
+app.whenReady().then(createWindow);
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
@@ -70,8 +81,8 @@ app.on('window-all-closed', function () {
 app.on('activate', function () {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if (mainWindow === null) {
-    createWindow();
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow()
   }
 });
 

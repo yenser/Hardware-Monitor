@@ -1,18 +1,18 @@
 [
     {
         "name": "HOME",
-        "link": "#/"
+        "link": "home"
     },
     {
         "name": "RAM",
-        "link": "#/ram"
+        "link": "ram"
     },
     {
         "name": "CPU",
-        "link": "#/cpu"
+        "link": "cpu"
     },
     {
         "name": "Credit",
-        "link": "#/credit"
+        "link": "credit"
     }
 ]
